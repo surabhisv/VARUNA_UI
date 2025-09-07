@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VARUNA - HOSTILE INTERFACE</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div id="topBar">
+    <div class="left">
+      <div class="hamburger" id="appDrawerToggle" title="Toggle App Drawer">
+        ☰
+      </div>
+      <div class="varuna">VARUNA 2.0</div>
+      <div class="icon-label"><span>☀️</span> <span id="temp">--°</span></div>
+      <div class="icon-label"><span>💨</span> <span id="wind">--</span></div>
+      <div class="icon-label"><span>💧</span> <span id="humidity">--</span></div>
+      <div class="icon-label"><span>🌦️</span> <span id="forecast">--</span></div>
+      <div class="icon-label"><span>👁️</span> <span id="visibility">--</span></div>
+      </div>
+
+    <div class="right">
+      <span id="clock">12:30:45 IST</span>
+      <button title="Notifications">🔔</button>
+      <button title="Warnings">⚠️</button>
+      <button title="Bugs">🐞</button>
+      <button title="Settings">⚙️</button>
+    </div>
+  </div>
+
+  <!-- App Drawer -->
+  <div id="appDrawer" class="app-drawer hidden">
+    <button data-window="leftPanel">Mission Controls</button>
+    <button data-window="centerMap">Navigation Map</button>
+    <button data-window="rightPanel">Sensors & Cameras</button>
+    <button data-window="bottomPanel">Mission Log</button>
+    <button data-window="alertBox">Alert Box</button>
+  </div>
+
+  <!-- Windows -->
+  <div id="leftPanel" class="window" data-title="Mission Controls & Status">
+    <div class="title-bar">
+      Mission Controls & Status
+      <div class="window-controls">
+        <button class="minimize-btn">_</button>
+        <button class="maximize-btn">⬜</button>
+        <button class="close-btn">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <button class="bg-blue-700">Start Mission</button>
+      <button class="bg-yellow-700">Pause Mission</button>
+      <button class="bg-red-700">Abort Mission</button>
+
+      <h3>Current Status</h3>
+      <ul>
+        <li>Mode: <strong>Autonomous</strong></li>
+        <li>Battery: <strong>78%</strong></li>
+        <li>Signal Strength: <strong>Strong</strong></li>
+        <li>Depth: <strong>120 m</strong></li>
+        <li>Speed: <strong>3.2 knots</strong></li>
+      </ul>
+
+      <h3>Waypoint Control</h3>
+      <label for="waypointInput">Next Waypoint (lat, lon):</label>
+      <input id="waypointInput" type="text" placeholder="13.10, 77.60" />
+      <button class="bg-green-700">Set Waypoint</button>
+    </div>
+  </div>
+
+  <div id="centerMap" class="window" data-title="Navigation Map">
+    <div class="title-bar">
+      Navigation Map
+      <div class="window-controls">
+        <button class="minimize-btn">_</button>
+        <button class="maximize-btn">⬜</button>
+        <button class="close-btn">×</button>
+      </div>
+    </div>
+    <div class="content" style="position: relative; padding: 0;">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/World_map_blank_without_borders.svg/2000px-World_map_blank_without_borders.svg.png"
+        alt="Real-time navigation map"
+        style="width: 100%; height: 100%; object-fit: cover; border-radius: 0 0 6px 6px;"
+      />
+      <div class="map-overlay">
+        <div>Current Position: <strong>13.08°N, 77.58°E</strong></div>
+        <div>Target Waypoint: <strong>13.10°N, 77.60°E</strong></div>
+        <div>Distance Remaining: <strong>1.5 km</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="rightPanel" class="window" data-title="Sensors & Cameras">
+    <div class="title-bar">
+      Sensors & Cameras
+      <div class="window-controls">
+        <button class="minimize-btn">_</button>
+        <button class="maximize-btn">⬜</button>
+        <button class="close-btn">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <h4>Sonar Imaging</h4>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Side_Scan_Sonar_Image_of_Shipwreck.png"
+        alt="Sonar"
+      />
+
+      <h4>Thermal Camera</h4>
+      <video autoplay loop muted playsinline>
+        <source src="https://player.vimeo.com/external/366372697.sd.mp4?s=9ee1c282dbd989bb339b1519789c59f991a730c7&profile_id=164" type="video/mp4" />
+      </video>
+
+      <h4>Drone Feed</h4>
+      <video autoplay loop muted playsinline>
+        <source src="https://player.vimeo.com/external/341840148.sd.mp4?s=b31c5461225394c1e22de7dc1c9ae2f5a4dba5bb&profile_id=164" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <div id="bottomPanel" class="window" data-title="Mission Log">
+    <div class="title-bar">
+      Mission Log
+      <div class="window-controls">
+        <button class="minimize-btn">_</button>
+        <button class="maximize-btn">⬜</button>
+        <button class="close-btn">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <div>[12:29:30] Mission started successfully.</div>
+      <div>[12:30:00] AUV submerged to 50m depth.</div>
+      <div>[12:30:20] Sonar detected object at 30m distance.</div>
+      <div>[12:30:40] Thermal camera activated.</div>
+      <div>[12:31:00] Signal strength nominal.</div>
+    </div>
+  </div>
+
+  <div id="alertBox" class="window" data-title="Alert Box">
+    <div class="title-bar">
+      Alert Box
+      <div class="window-controls">
+        <button class="minimize-btn">_</button>
+        <button class="maximize-btn">⬜</button>
+        <button class="close-btn">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <strong>3 Hostile Tracks Identified</strong><br />
+      300m away<br />
+      System alert! Monitoring suspicious underwater activity...
+      
+    </div>
+  </div>
+
+  <!-- Taskbar for minimized windows -->
+  <div id="taskbar"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

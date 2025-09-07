@@ -1,0 +1,256 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Body and fonts */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0a0a0a;
+  color: #ddd;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Top Bar */
+#topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 1000;
+}
+
+#topBar .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#topBar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.varuna {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #39ff14;
+  cursor: default;
+}
+
+.icon-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #aaa;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+button {
+  background: transparent;
+  border: none;
+  color: #ddd;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+button:hover {
+  color: #39ff14;
+}
+
+#clock {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hamburger icon */
+.hamburger {
+  font-size: 24px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #39ff14;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.hamburger:hover {
+  background-color: #222;
+}
+
+/* App Drawer */
+.app-drawer {
+  position: absolute;
+  top: 38px;
+  left: 8px;
+  background: #111;
+  border: 1px solid #222;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 1050;
+  min-width: 160px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-shadow: 0 0 12px #39ff14aa;
+  transition: opacity 0.3s ease;
+}
+
+.app-drawer.hidden {
+  display: none;
+}
+
+.app-drawer button {
+  background: #222;
+  color: #39ff14;
+  border: 1px solid #39ff14;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.app-drawer button:hover {
+  background: #39ff14;
+  color: #000;
+}
+
+/* Windows */
+.window {
+  position: absolute;
+  background: #111;
+  border: 2px solid #39ff14;
+  border-radius: 6px;
+  box-shadow: 0 0 12px #39ff14aa;
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  min-width: 300px;
+  min-height: 200px;
+  resize: both;
+}
+
+.window.active {
+  display: flex;
+  z-index: 10;
+}
+
+/* Title bar */
+.title-bar {
+  background: #222;
+  padding: 6px 10px;
+  color: #39ff14;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.window-controls button {
+  background: transparent;
+  border: none;
+  color: #39ff14;
+  font-size: 18px;
+  margin-left: 8px;
+  cursor: pointer;
+   -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.window-controls button:hover {
+  color: #fff;
+}
+
+/* Content */
+.content {
+  padding: 12px;
+  overflow: auto;
+  flex-grow: 1;
+  color: #ccc;
+}
+
+/* Map overlay */
+.map-overlay {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: #000a;
+  color: #39ff14;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* Taskbar */
+#taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  border-top: 2px solid #39ff14;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 2000;
+}
+
+#taskbar button {
+  background: #222;
+  color: #39ff14;
+  border: 1px solid #39ff14;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+#taskbar button:hover {
+  background: #39ff14;
+  color: #000;
+}
+#rightPanel {
+  width: 280px;      /* smaller width */
+  height: 300px;     /* smaller height */
+  min-width: unset;  /* override min-width */
+  min-height: unset; /* override min-height */
+}
