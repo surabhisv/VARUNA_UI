@@ -194,31 +194,45 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateClock, 1000);
 
 });
-  // Live Weather Update (using Open-Meteo API: free, no API key)
-  async function updateWeather() {
-    try {
-      // Example: Bangalore coordinates (you can change lat/lon)
-      const lat = 13.08;
-      const lon = 77.58;
+// Live Weather Update (using Open-Meteo API: free, no API key)
+async function updateWeather() {
+  try {
+    const lat = 13.08;
+    const lon = 77.58;
 
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m,visibility`;
-      const res = await fetch(url);
-      const data = await res.json();
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m,visibility`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-      const weather = data.current_weather;
-      const humidity = data.hourly.relativehumidity_2m[0];
-      const visibility = data.hourly.visibility[0] / 1000; // meters → km
+    const weather = data.current_weather;
 
-      document.getElementById("temp").textContent = `${weather.temperature}°C`;
-      document.getElementById("wind").textContent = `${weather.windspeed} km/h`;
-      document.getElementById("humidity").textContent = `${humidity}% humid`;
-      document.getElementById("forecast").textContent = `${weather.temperature - 2}° expected next hr`;
-      document.getElementById("visibility").textContent = `${visibility} km visible`;
-    } catch (err) {
-      console.error("Weather fetch failed", err);
-    }
+    // Find the hourly index that matches current time
+    const now = new Date();
+    const times = data.hourly.time.map(t => new Date(t));
+    let closestIndex = 0;
+    let minDiff = Infinity;
+
+    times.forEach((t, i) => {
+      const diff = Math.abs(now - t);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = i;
+      }
+    });
+
+    const humidity = data.hourly.relativehumidity_2m[closestIndex];
+    const visibility = data.hourly.visibility[closestIndex] / 1000; // meters → km
+
+    // Update DOM
+    document.getElementById("temp").textContent = `${weather.temperature}°C`;
+    document.getElementById("wind").textContent = `${weather.windspeed} km/h`;
+    document.getElementById("humidity").textContent = `${humidity}% humid`;
+    document.getElementById("forecast").textContent = `${weather.temperature - 2}° expected next hr`;
+    document.getElementById("visibility").textContent = `${visibility.toFixed(2)} km visible`;
+  } catch (err) {
+    console.error("Weather fetch failed", err);
   }
+}
 
-  updateWeather();
-  setInterval(updateWeather, 60000); // refresh every 1 minute
-
+updateWeather();
+setInterval(updateWeather, 60000); // refresh every 1 minute
